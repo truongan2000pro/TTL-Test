@@ -24,7 +24,8 @@ function calculateGold(m, d, k, c) {
 
   // Kill monsters until durability is 1 or there are no more monsters
   for (let i = 0; i < m; i++) {
-    remainingMonsters -= remainingDurability - 1;
+    // Save 1d to prevent breaking the sword
+    remainingMonsters -= Math.floor((remainingDurability - 1) / k);
     remainingDurability -= remainingDurability - 1;
 
     // If durability becomes 1, repair it
@@ -32,7 +33,7 @@ function calculateGold(m, d, k, c) {
       totalGoldNeeded += c;
       remainingDurability = d;
 
-      if (remainingMonsters <= remainingDurability) break;
+      if (remainingMonsters <= Math.floor(remainingDurability / k)) break;
     }
   }
 
