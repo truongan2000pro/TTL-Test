@@ -23,19 +23,16 @@ function calculateGold(m, d, k, c) {
   let remainingMonsters = m;
 
   // Kill monsters until durability is 1 or there are no more monsters
-  for (let i = 0; i < remainingMonsters; i++) {
+  for (let i = 0; i < m; i++) {
     remainingMonsters -= remainingDurability - 1;
     remainingDurability -= remainingDurability - 1;
 
-    if (remainingMonsters <= remainingDurability) {
-      continue;
-    }
-
     // If durability becomes 1, repair it
-    console.log(remainingDurability, remainingMonsters);
     if (remainingDurability === 1) {
       totalGoldNeeded += c;
       remainingDurability = d;
+
+      if (remainingMonsters <= remainingDurability) break;
     }
   }
 
